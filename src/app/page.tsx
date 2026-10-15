@@ -10,7 +10,6 @@ import { calculateClinicStatus } from '@/lib/schedule';
 import HomeClientWrapper from '@/components/HomeClientWrapper';
 import { DynamicTabSync } from '@/components/DynamicTabSync';
 
-
 export async function generateMetadata({
   searchParams,
 }: {

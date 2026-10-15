@@ -21,10 +21,11 @@ import {
   getContactMessages,
   getActivityLogs,
 } from '@/lib/db';
+import { connection } from 'next/server';
 import AdminOverviewClient from './AdminOverviewClient';
 
-
 export default async function AdminOverviewPage() {
+  await connection();
   const [settings, appointments, messages, logs] = await Promise.all([
     getClinicSettings(true),
     getAppointments(),

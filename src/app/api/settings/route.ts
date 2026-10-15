@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getClinicSettings, updateClinicSettings } from '@/lib/db';
 import { getAdminSession } from '@/lib/auth';
 
@@ -41,6 +42,12 @@ export async function PUT(request: Request) {
       Boolean(isDraft),
       session.email
     );
+
+    try {
+      revalidatePath('/', 'layout');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
 
     return NextResponse.json({
       success: true,

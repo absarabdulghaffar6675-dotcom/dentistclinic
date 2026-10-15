@@ -52,11 +52,54 @@ export default function AdminSidebarClient({
 }: AdminSidebarClientProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const isLoginPage = pathname === '/admin/login';
   const [mobileOpen, setMobileOpen] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [publishSuccess, setPublishSuccess] = useState(false);
+  const [liveAppointmentsCount, setLiveAppointmentsCount] = useState(pendingAppointmentsCount);
+  const [liveMessagesCount, setLiveMessagesCount] = useState(unreadMessagesCount);
 
-  const isLoginPage = pathname === '/admin/login';
+  useEffect(() => {
+    setLiveAppointmentsCount(pendingAppointmentsCount);
+  }, [pendingAppointmentsCount]);
+
+  useEffect(() => {
+    setLiveMessagesCount(unreadMessagesCount);
+  }, [unreadMessagesCount]);
+
+  // Live polling for badges every 5 seconds so notifications update without page refresh
+  useEffect(() => {
+    if (isLoginPage || !user) return;
+    let isMounted = true;
+    const fetchCounts = async () => {
+      try {
+        const [aptRes, msgRes] = await Promise.all([
+          fetch('/api/appointments?status=pending', { cache: 'no-store' }),
+          fetch('/api/messages', { cache: 'no-store' }),
+        ]);
+        if (aptRes.ok && isMounted) {
+          const apts = await aptRes.json();
+          if (Array.isArray(apts)) {
+            setLiveAppointmentsCount(apts.filter((a: { status: string }) => a.status === 'pending').length);
+          }
+        }
+        if (msgRes.ok && isMounted) {
+          const msgs = await msgRes.json();
+          if (Array.isArray(msgs)) {
+            setLiveMessagesCount(msgs.filter((m: { is_read: boolean; is_archived: boolean }) => !m.is_read && !m.is_archived).length);
+          }
+        }
+      } catch {
+        // silent
+      }
+    };
+
+    const timer = setInterval(fetchCounts, 5000);
+    return () => {
+      isMounted = false;
+      clearInterval(timer);
+    };
+  }, [isLoginPage, user]);
 
   useEffect(() => {
     if (!isLoginPage && !user) {
@@ -107,14 +150,14 @@ export default function AdminSidebarClient({
       label: 'Appointments',
       href: '/admin/appointments',
       icon: Calendar,
-      badge: pendingAppointmentsCount > 0 ? pendingAppointmentsCount : null,
+      badge: liveAppointmentsCount > 0 ? liveAppointmentsCount : null,
       badgeColor: 'bg-amber-500',
     },
     {
       label: 'Messages',
       href: '/admin/messages',
       icon: Inbox,
-      badge: unreadMessagesCount > 0 ? unreadMessagesCount : null,
+      badge: liveMessagesCount > 0 ? liveMessagesCount : null,
       badgeColor: 'bg-blue-500',
     },
     { label: 'SEO & Social', href: '/admin/seo', icon: Globe },

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getGalleryImages, saveGalleryImage, deleteGalleryImage } from '@/lib/db';
 import { getAdminSession } from '@/lib/auth';
 
@@ -31,6 +32,11 @@ export async function POST(request: Request) {
     }
 
     const saved = await saveGalleryImage(image, session.email);
+    try {
+      revalidatePath('/', 'layout');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
     return NextResponse.json({ success: true, image: saved });
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Error saving gallery image';
@@ -53,6 +59,11 @@ export async function DELETE(request: Request) {
     }
 
     await deleteGalleryImage(id, session.email);
+    try {
+      revalidatePath('/', 'layout');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Error deleting image';

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import {
   createAppointment,
   getAppointments,
@@ -37,6 +38,13 @@ export async function POST(request: Request) {
       status: 'pending',
       consent_given: true,
     });
+
+    try {
+      revalidatePath('/admin');
+      revalidatePath('/admin/appointments');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
 
     return NextResponse.json({
       success: true,
@@ -93,6 +101,13 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ error: 'Appointment not found' }, { status: 404 });
     }
 
+    try {
+      revalidatePath('/admin');
+      revalidatePath('/admin/appointments');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
+
     return NextResponse.json({ success: true, appointment: updated });
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Error updating appointment';
@@ -115,6 +130,12 @@ export async function DELETE(request: Request) {
     }
 
     await deleteAppointment(id);
+    try {
+      revalidatePath('/admin');
+      revalidatePath('/admin/appointments');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Error deleting appointment';

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getServices, saveService, deleteService } from '@/lib/db';
 import { getAdminSession } from '@/lib/auth';
 
@@ -34,6 +35,11 @@ export async function POST(request: Request) {
     }
 
     const saved = await saveService(service, session.email);
+    try {
+      revalidatePath('/', 'layout');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
     return NextResponse.json({ success: true, service: saved });
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Error saving service';
@@ -60,6 +66,11 @@ export async function DELETE(request: Request) {
     }
 
     await deleteService(id, session.email);
+    try {
+      revalidatePath('/', 'layout');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Error deleting service';

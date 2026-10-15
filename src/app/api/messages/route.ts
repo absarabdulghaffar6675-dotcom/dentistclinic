@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import {
   createContactMessage,
   getContactMessages,
@@ -25,6 +26,13 @@ export async function POST(request: Request) {
       subject: validated.subject.trim(),
       message: validated.message.trim(),
     });
+
+    try {
+      revalidatePath('/admin');
+      revalidatePath('/admin/messages');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
 
     return NextResponse.json({
       success: true,
@@ -76,6 +84,13 @@ export async function PATCH(request: Request) {
       ...(is_read !== undefined && { is_read }),
       ...(is_archived !== undefined && { is_archived }),
     });
+
+    try {
+      revalidatePath('/admin');
+      revalidatePath('/admin/messages');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
 
     return NextResponse.json({ success: true, message: updated });
   } catch (err: unknown) {

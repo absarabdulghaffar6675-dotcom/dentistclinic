@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getOpeningHours, updateOpeningHours } from '@/lib/db';
 import { getAdminSession } from '@/lib/auth';
 
@@ -25,6 +26,11 @@ export async function PUT(request: Request) {
     }
 
     const updated = await updateOpeningHours(hours, session.email);
+    try {
+      revalidatePath('/', 'layout');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
     return NextResponse.json({ success: true, hours: updated });
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Error updating hours';

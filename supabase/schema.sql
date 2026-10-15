@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS public.clinic_settings (
     
     logo_url TEXT DEFAULT '/images/tooth-logo.svg',
     favicon_url TEXT DEFAULT '/images/tooth-logo.svg',
+    logo_icon TEXT DEFAULT 'tooth',
+    logo_badge_style TEXT DEFAULT 'badge',
     logo_text_fallback BOOLEAN DEFAULT false,
     logo_height INT DEFAULT 38,
     
@@ -69,6 +71,7 @@ CREATE TABLE IF NOT EXISTS public.clinic_settings (
     hero_tagline TEXT DEFAULT 'Your smile, our priority.',
     hero_description TEXT DEFAULT 'Modern dental care in a clean, safe and comfortable environment.',
     hero_image_url TEXT DEFAULT '/images/hero-clinic.jpg',
+    hero_images JSONB DEFAULT '[]'::jsonb,
     
     about_title TEXT DEFAULT 'About Dynasty Dental Solutions',
     about_description TEXT DEFAULT 'Dynasty Dental Solutions is a trusted dental clinic in Faisalabad, dedicated to providing high-quality dental care in a clean, modern, and comfortable environment. Our experienced team ensures personalized care for every patient, helping you achieve a healthy and confident smile.',
@@ -150,7 +153,7 @@ CREATE TABLE IF NOT EXISTS public.gallery_images (
 
 -- 6. Appointments Table (Patient Requests)
 CREATE TABLE IF NOT EXISTS public.appointments (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
     patient_name TEXT NOT NULL,
     phone TEXT NOT NULL,
     email TEXT,
@@ -171,7 +174,7 @@ CREATE INDEX IF NOT EXISTS idx_appointments_date ON public.appointments(requeste
 
 -- 7. Contact Messages Table
 CREATE TABLE IF NOT EXISTS public.contact_messages (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
     name TEXT NOT NULL,
     contact_info TEXT NOT NULL,
     subject TEXT NOT NULL,
@@ -185,7 +188,7 @@ CREATE INDEX IF NOT EXISTS idx_contact_messages_read ON public.contact_messages(
 
 -- 8. Admin Activity Logs Table
 CREATE TABLE IF NOT EXISTS public.admin_activity_logs (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
     action TEXT NOT NULL,
     details TEXT,
     admin_user TEXT DEFAULT 'owner@dynastydental.pk',
@@ -264,3 +267,68 @@ CREATE POLICY "Authenticated Delete clinic-assets"
 ON storage.objects FOR DELETE 
 TO authenticated 
 USING (bucket_id = 'clinic-assets');
+
+-- ==============================================================================
+-- 10. SAFE MIGRATIONS & SEED DATA
+-- (Idempotent: safe to run multiple times without duplicating or corrupting data)
+-- ==============================================================================
+
+-- Ensure extra branding columns exist on existing databases
+ALTER TABLE public.clinic_settings ADD COLUMN IF NOT EXISTS logo_icon TEXT DEFAULT 'tooth';
+ALTER TABLE public.clinic_settings ADD COLUMN IF NOT EXISTS logo_badge_style TEXT DEFAULT 'badge';
+ALTER TABLE public.clinic_settings ADD COLUMN IF NOT EXISTS hero_images JSONB DEFAULT '[]'::jsonb;
+
+-- Ensure ID column types accept standard string UUIDs without syntax error
+DO $$
+BEGIN
+    -- Only alter if current type is uuid
+    IF EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_schema = 'public' 
+        AND table_name = 'appointments' 
+        AND column_name = 'id' 
+        AND data_type = 'uuid'
+    ) THEN
+        ALTER TABLE public.appointments ALTER COLUMN id TYPE TEXT;
+    END IF;
+
+    IF EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_schema = 'public' 
+        AND table_name = 'contact_messages' 
+        AND column_name = 'id' 
+        AND data_type = 'uuid'
+    ) THEN
+        ALTER TABLE public.contact_messages ALTER COLUMN id TYPE TEXT;
+    END IF;
+
+    IF EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_schema = 'public' 
+        AND table_name = 'admin_activity_logs' 
+        AND column_name = 'id' 
+        AND data_type = 'uuid'
+    ) THEN
+        ALTER TABLE public.admin_activity_logs ALTER COLUMN id TYPE TEXT;
+    END IF;
+END $$;
+
+-- Insert initial primary clinic settings row so edits and reads succeed immediately
+INSERT INTO public.clinic_settings (
+    id, clinic_name, tagline, description, doctor_name, doctor_credentials,
+    phone, whatsapp, email, full_address, city, primary_color, accent_blue
+) VALUES (
+    'dynasty-settings-1',
+    'Dynasty Dental Solutions',
+    'Your Smile, Our Priority.',
+    'Modern dental care in a clean, safe and comfortable environment.',
+    'Dr. M. Niyalish Semab',
+    'BDS, RDS — Consultant Dental Surgeon',
+    '0306 1521205',
+    '923061521205',
+    'dynastydentalsolutions@gmail.com',
+    'Jinnah Rd, Zia Colony, Faisalabad, Punjab, Pakistan',
+    'Faisalabad',
+    '#153E70',
+    '#0878F9'
+) ON CONFLICT (id) DO NOTHING;

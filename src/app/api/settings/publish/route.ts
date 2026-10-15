@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { publishDraftChanges } from '@/lib/db';
 import { getAdminSession } from '@/lib/auth';
 
@@ -10,6 +11,11 @@ export async function POST() {
     }
 
     const published = await publishDraftChanges(session.email);
+    try {
+      revalidatePath('/', 'layout');
+    } catch (e) {
+      console.warn('revalidatePath ignored:', e);
+    }
     return NextResponse.json({
       success: true,
       settings: published,

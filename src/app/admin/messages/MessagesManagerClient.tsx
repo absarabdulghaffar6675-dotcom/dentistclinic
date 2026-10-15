@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   Inbox,
@@ -22,6 +22,30 @@ export default function MessagesManagerClient({
   const router = useRouter();
   const [messages, setMessages] = useState<ContactMessage[]>(initialMessages);
   const [searchTerm, setSearchTerm] = useState('');
+
+  // Real-time live polling: checks for new messages every 4s without requiring browser refresh
+  useEffect(() => {
+    let isMounted = true;
+    const fetchLatest = async () => {
+      try {
+        const res = await fetch('/api/messages', { cache: 'no-store' });
+        if (res.ok) {
+          const freshData = await res.json();
+          if (isMounted && Array.isArray(freshData)) {
+            setMessages(freshData);
+          }
+        }
+      } catch (err) {
+        console.warn('Messages live sync poll error:', err);
+      }
+    };
+
+    const interval = setInterval(fetchLatest, 4000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
 
   const filtered = messages.filter((m) => {
     return (
@@ -69,9 +93,13 @@ export default function MessagesManagerClient({
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-[#153E70] flex items-center gap-2">
+          <h2 className="text-xl font-bold text-[#153E70] flex items-center gap-2 flex-wrap">
             <Inbox className="w-5 h-5 text-[#0878F9]" />
             <span>Inquiries &amp; Messages Inbox</span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Live Sync (Auto-refreshes)
+            </span>
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">
             Direct patient questions and contact form inquiries.

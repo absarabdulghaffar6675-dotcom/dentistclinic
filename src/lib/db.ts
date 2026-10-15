@@ -225,14 +225,21 @@ export async function updateClinicSettings(
     saveLocalData(local);
 
     if (isSupabaseConfigured() && supabaseAdmin) {
-      await supabaseAdmin
-        .from('clinic_settings')
-        .update({
-          has_draft_changes: true,
-          draft_data: newSettings,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', 'dynasty-settings-1');
+      try {
+        const { error } = await supabaseAdmin
+          .from('clinic_settings')
+          .upsert({
+            id: 'dynasty-settings-1',
+            has_draft_changes: true,
+            draft_data: newSettings,
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'id' });
+        if (error) {
+          console.error('Supabase save draft error:', error);
+        }
+      } catch (err) {
+        console.error('Supabase save draft exception:', err);
+      }
     }
 
     return updatedDraft;
@@ -248,7 +255,7 @@ export async function updateClinicSettings(
     local.settings = published;
     local.draftSettings = undefined;
     local.activityLogs.unshift({
-      id: `log-${Date.now()}`,
+      id: crypto.randomUUID(),
       action: 'Settings Published',
       details: 'Owner published updated clinic settings to live website.',
       admin_user: adminUser,
@@ -257,13 +264,22 @@ export async function updateClinicSettings(
     saveLocalData(local);
 
     if (isSupabaseConfigured() && supabaseAdmin) {
-      await supabaseAdmin
-        .from('clinic_settings')
-        .upsert({
-          ...published,
-          has_draft_changes: false,
-          draft_data: null,
-        });
+      try {
+        const { error } = await supabaseAdmin
+          .from('clinic_settings')
+          .upsert({
+            ...published,
+            id: 'dynasty-settings-1',
+            has_draft_changes: false,
+            draft_data: null,
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'id' });
+        if (error) {
+          console.error('Supabase publish settings error:', error);
+        }
+      } catch (err) {
+        console.error('Supabase publish settings exception:', err);
+      }
     }
 
     return published;
@@ -281,7 +297,7 @@ export async function publishDraftChanges(adminUser: string = 'owner'): Promise<
     };
     local.draftSettings = undefined;
     local.activityLogs.unshift({
-      id: `log-${Date.now()}`,
+      id: crypto.randomUUID(),
       action: 'Changes Published',
       details: 'Draft changes were successfully published to live website.',
       admin_user: adminUser,
@@ -290,15 +306,22 @@ export async function publishDraftChanges(adminUser: string = 'owner'): Promise<
     saveLocalData(local);
 
     if (isSupabaseConfigured() && supabaseAdmin) {
-      await supabaseAdmin
-        .from('clinic_settings')
-        .update({
-          ...local.settings,
-          has_draft_changes: false,
-          draft_data: null,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', 'dynasty-settings-1');
+      try {
+        const { error } = await supabaseAdmin
+          .from('clinic_settings')
+          .upsert({
+            ...local.settings,
+            id: 'dynasty-settings-1',
+            has_draft_changes: false,
+            draft_data: null,
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'id' });
+        if (error) {
+          console.error('Supabase publishDraftChanges error:', error);
+        }
+      } catch (err) {
+        console.error('Supabase publishDraftChanges exception:', err);
+      }
     }
   }
   return local.settings;
@@ -511,9 +534,10 @@ export async function deleteGalleryImage(imageId: string, adminUser: string = 'o
 // ----------------- Appointments -----------------
 
 export async function createAppointment(data: Omit<Appointment, 'id' | 'created_at' | 'updated_at'>): Promise<Appointment> {
+  const generatedId = crypto.randomUUID();
   const newAppointment: Appointment = {
     ...data,
-    id: `apt-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    id: generatedId,
     status: 'pending',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
@@ -524,7 +548,14 @@ export async function createAppointment(data: Omit<Appointment, 'id' | 'created_
   saveLocalData(local);
 
   if (isSupabaseConfigured() && supabaseAdmin) {
-    await supabaseAdmin.from('appointments').insert(newAppointment);
+    try {
+      const { error } = await supabaseAdmin.from('appointments').insert(newAppointment);
+      if (error) {
+        console.error('Supabase createAppointment error:', error);
+      }
+    } catch (err) {
+      console.error('Supabase createAppointment exception:', err);
+    }
   }
 
   return newAppointment;
@@ -542,6 +573,7 @@ export async function getAppointments(status?: string, search?: string): Promise
       }
       const { data, error } = await query;
       if (!error && data) return data as Appointment[];
+      if (error) console.warn('Supabase fetch appointments error:', error);
     } catch (err) {
       console.warn('Supabase fetch appointments failed:', err);
     }
@@ -574,7 +606,7 @@ export async function updateAppointmentStatus(
   item.updated_at = new Date().toISOString();
 
   local.activityLogs.unshift({
-    id: `log-${Date.now()}`,
+    id: crypto.randomUUID(),
     action: 'Appointment Status Changed',
     details: `Appointment for ${item.patient_name} marked as "${status}".`,
     admin_user: adminUser,
@@ -584,10 +616,14 @@ export async function updateAppointmentStatus(
   saveLocalData(local);
 
   if (isSupabaseConfigured() && supabaseAdmin) {
-    await supabaseAdmin
-      .from('appointments')
-      .update({ status, updated_at: new Date().toISOString() })
-      .eq('id', id);
+    try {
+      await supabaseAdmin
+        .from('appointments')
+        .update({ status, updated_at: new Date().toISOString() })
+        .eq('id', id);
+    } catch (err) {
+      console.error('Supabase updateAppointmentStatus error:', err);
+    }
   }
 
   return item;
@@ -599,7 +635,11 @@ export async function deleteAppointment(id: string): Promise<boolean> {
   saveLocalData(local);
 
   if (isSupabaseConfigured() && supabaseAdmin) {
-    await supabaseAdmin.from('appointments').delete().eq('id', id);
+    try {
+      await supabaseAdmin.from('appointments').delete().eq('id', id);
+    } catch (err) {
+      console.error('Supabase deleteAppointment error:', err);
+    }
   }
 
   return true;
@@ -608,9 +648,10 @@ export async function deleteAppointment(id: string): Promise<boolean> {
 // ----------------- Contact Messages -----------------
 
 export async function createContactMessage(data: Omit<ContactMessage, 'id' | 'is_read' | 'is_archived' | 'created_at'>): Promise<ContactMessage> {
+  const generatedId = crypto.randomUUID();
   const newMsg: ContactMessage = {
     ...data,
-    id: `msg-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    id: generatedId,
     is_read: false,
     is_archived: false,
     created_at: new Date().toISOString(),
@@ -621,7 +662,14 @@ export async function createContactMessage(data: Omit<ContactMessage, 'id' | 'is
   saveLocalData(local);
 
   if (isSupabaseConfigured() && supabaseAdmin) {
-    await supabaseAdmin.from('contact_messages').insert(newMsg);
+    try {
+      const { error } = await supabaseAdmin.from('contact_messages').insert(newMsg);
+      if (error) {
+        console.error('Supabase createContactMessage error:', error);
+      }
+    } catch (err) {
+      console.error('Supabase createContactMessage exception:', err);
+    }
   }
 
   return newMsg;
