@@ -64,7 +64,7 @@ export default function ProfileEditorClient({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          seo_meta_title: `${formData.clinic_name} | Best Dental Clinic in ${formData.city || 'Faisalabad'}`,
+          seo_meta_title: `${formData.clinic_name} | Best Dental Clinic in ${initialSettings.city || 'Faisalabad'}`,
           isDraft,
         }),
       });
