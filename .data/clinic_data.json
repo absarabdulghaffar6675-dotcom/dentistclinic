@@ -1,0 +1,656 @@
+{
+  "settings": {
+    "id": "dynasty-settings-1",
+    "clinic_name": "Dental Solutions",
+    "tagline": "Your Smile, Our Priority.",
+    "description": "Modern dental care in a clean, safe and comfortable environment.",
+    "doctor_name": "Dr. M. Niyalish Semab",
+    "doctor_credentials": "BDS, RDS — Consultant Dental Surgeon",
+    "doctor_bio": "Dedicated to offering exceptional oral health services, preventative care, cosmetic transformations, and emergency treatments with state-of-the-art dental technology.",
+    "doctor_image_url": "/images/doctor-profile.jpg",
+    "phone": "0306 1521205",
+    "phone_display": "Call 0306 1521205",
+    "whatsapp": "923061521205",
+    "email": "dynastydentalsolutions@gmail.com",
+    "full_address": "jinnah RD,zia colony,Faisalabad,saifabad,pakistan",
+    "colony_area": "Zia Colony, Jinnah Rd",
+    "city": "Faisalabad",
+    "postal_code": "38000",
+    "country": "Pakistan",
+    "latitude": 31.406472070936722,
+    "longitude": 73.03008268255091,
+    "directions_url": "https://maps.app.goo.gl/TCEkk919vLJ2saZ77",
+    "map_zoom": 16,
+    "timezone": "Asia/Karachi",
+    "verified_clinic": true,
+    "rating_score": 4.5,
+    "reviews_count": 400,
+    "show_rating": true,
+    "logo_url": "/images/tooth-logo.svg",
+    "favicon_url": "/images/tooth-logo.svg",
+    "logo_text_fallback": false,
+    "logo_height": 39,
+    "primary_color": "#1fe7ea",
+    "accent_blue": "#0878F9",
+    "light_bg_color": "#EAF4FF",
+    "is_published": true,
+    "has_draft_changes": false,
+    "holiday_notice": "",
+    "show_holiday_notice": false,
+    "seo_meta_title": "Dental Solutions | Best Dental Clinic in Faisalabad",
+    "seo_meta_description": "Dental Solutions in Faisalabad provides 24/7 world-class dental care, cosmetic dentistry, root canal treatments, teeth whitening, and emergency dental services.",
+    "seo_keywords": "dental clinic Faisalabad, dentist in Faisalabad, Dental Solutions, teeth cleaning, root canal, 24/7 emergency dentist",
+    "og_image_url": "/images/hero-clinic.jpg",
+    "social_facebook": "https://facebook.com",
+    "social_instagram": "https://instagram.com",
+    "social_youtube": "https://youtube.com",
+    "social_twitter": "https://twitter.com",
+    "hero_headline": "Dental Solutions",
+    "hero_tagline": "Your smile, our priority.",
+    "hero_description": "Modern dental care in a clean, safe and comfortable environment.",
+    "hero_image_url": "/uploads/1791639909040-kau1ce.jpg",
+    "about_title": "About Dynasty Dental Solutions",
+    "about_description": "Dynasty Dental Solutions is a trusted dental clinic in Faisalabad, dedicated to providing high-quality dental care in a clean, modern, and comfortable environment. Our experienced team ensures personalized care for every patient, helping you achieve a healthy and confident smile.",
+    "about_badges": [
+      {
+        "icon": "shield-check",
+        "title": "Professional Dental Care"
+      },
+      {
+        "icon": "settings",
+        "title": "Modern Equipment"
+      },
+      {
+        "icon": "shield-plus",
+        "title": "Clean & Safe Environment"
+      },
+      {
+        "icon": "user-heart",
+        "title": "Patient-Focused Service"
+      }
+    ],
+    "insights": {
+      "accessibility": {
+        "wheelchair_entrance": true,
+        "wheelchair_parking": true,
+        "wheelchair_restroom": true,
+        "wheelchair_seating": true
+      },
+      "amenities": {
+        "restroom": true,
+        "waiting_lounge": true,
+        "wifi": true
+      },
+      "payments": {
+        "checks": true,
+        "nfc_mobile": true,
+        "payment_plans": true,
+        "cash": true,
+        "credit_cards": true
+      }
+    },
+    "updated_at": "2026-10-14T11:42:21.682Z",
+    "logo_icon": "star",
+    "logo_badge_style": "plain"
+  },
+  "openingHours": [
+    {
+      "id": "h-1",
+      "day_of_week": "Monday",
+      "is_open_24h": true,
+      "is_closed": false,
+      "open_time": "00:00",
+      "close_time": "23:59",
+      "display_text": "Open 24 hours",
+      "display_order": 1
+    },
+    {
+      "id": "h-2",
+      "day_of_week": "Tuesday",
+      "is_open_24h": true,
+      "is_closed": false,
+      "open_time": "00:00",
+      "close_time": "23:59",
+      "display_text": "Open 24 hours",
+      "display_order": 2
+    },
+    {
+      "id": "h-3",
+      "day_of_week": "Wednesday",
+      "is_open_24h": true,
+      "is_closed": false,
+      "open_time": "00:00",
+      "close_time": "23:59",
+      "display_text": "Open 24 hours",
+      "display_order": 3
+    },
+    {
+      "id": "h-4",
+      "day_of_week": "Thursday",
+      "is_open_24h": true,
+      "is_closed": false,
+      "open_time": "00:00",
+      "close_time": "23:59",
+      "display_text": "Open 24 hours",
+      "display_order": 4
+    },
+    {
+      "id": "h-5",
+      "day_of_week": "Friday",
+      "is_open_24h": true,
+      "is_closed": false,
+      "open_time": "00:00",
+      "close_time": "23:59",
+      "display_text": "Open 24 hours",
+      "display_order": 5
+    },
+    {
+      "id": "h-6",
+      "day_of_week": "Saturday",
+      "is_open_24h": true,
+      "is_closed": false,
+      "open_time": "00:00",
+      "close_time": "23:59",
+      "display_text": "Open 24 hours",
+      "display_order": 6
+    },
+    {
+      "id": "h-7",
+      "day_of_week": "Sunday",
+      "is_open_24h": true,
+      "is_closed": false,
+      "open_time": "00:00",
+      "close_time": "23:59",
+      "display_text": "Open 24 hours",
+      "display_order": 7
+    }
+  ],
+  "services": [
+    {
+      "id": "s-1",
+      "title": "General Dentistry",
+      "slug": "general-dentistry",
+      "short_description": "Comprehensive dental exams, cleanings, and preventive care for total oral wellness.",
+      "full_description": "Our general dentistry services cover diagnostic examinations, digital X-rays, cavity prevention, gentle extractions, and regular maintenance to keep your teeth healthy.",
+      "icon_name": "tooth",
+      "display_order": 1,
+      "is_active": true,
+      "price_range": "Standard Consultation"
+    },
+    {
+      "id": "s-2",
+      "title": "Cosmetic Dentistry",
+      "slug": "cosmetic-dentistry",
+      "short_description": "Smile makeovers, veneers, composite bonding, and aesthetic restorations.",
+      "full_description": "Transform your smile with porcelain veneers, custom teeth contouring, and aesthetic composite fillings engineered to look natural and radiant.",
+      "icon_name": "smile",
+      "display_order": 2,
+      "is_active": true,
+      "price_range": "Custom Quote"
+    },
+    {
+      "id": "s-3",
+      "title": "Teeth Cleaning",
+      "slug": "teeth-cleaning",
+      "short_description": "Ultrasonic scaling, stain removal, and polishing for clean breath and healthy gums.",
+      "full_description": "Professional dental prophylaxis removing stubborn plaque, tartar calculus, and tobacco or coffee stains while protecting delicate enamel.",
+      "icon_name": "sparkles",
+      "display_order": 3,
+      "is_active": true,
+      "price_range": "Affordable Session"
+    },
+    {
+      "id": "s-5",
+      "title": "Emergency Dental Care",
+      "slug": "emergency-dental-care",
+      "short_description": "24/7 urgent dental relief for acute toothaches, trauma, and broken teeth.",
+      "full_description": "Immediate relief for severe tooth pain, fractured crowns, dental abscesses, or facial trauma. Walk-in and 24-hour telephone triage available.",
+      "icon_name": "clock",
+      "display_order": 5,
+      "is_active": true,
+      "price_range": "Immediate Attention"
+    },
+    {
+      "id": "s-1791639363970",
+      "title": "cleaning",
+      "slug": "cleaning",
+      "short_description": "",
+      "full_description": "",
+      "icon_name": "tooth",
+      "display_order": 5,
+      "is_active": true,
+      "price_range": "Standard Consultation"
+    }
+  ],
+  "galleryImages": [
+    {
+      "id": "g-1",
+      "title": "Clinic Main Entrance & Signboard",
+      "description": "Exterior view of Dynasty Dental Solutions clinic with clear street signage and accessible entrance on Jinnah Rd.",
+      "image_url": "/images/clinic-exterior.jpg",
+      "category": "exterior",
+      "display_order": 1,
+      "is_featured": true,
+      "show_on_homepage": true
+    },
+    {
+      "id": "g-2",
+      "title": "Primary Dental Operatory Room",
+      "description": "Sterile treatment suite equipped with modern dental chair, overhead surgical lamp, and digital monitors.",
+      "image_url": "/images/treatment-room.jpg",
+      "category": "treatment",
+      "display_order": 2,
+      "is_featured": false,
+      "show_on_homepage": true
+    },
+    {
+      "id": "g-3",
+      "title": "Clinical Smile Aesthetic Demonstration",
+      "description": "Precision cosmetic dentistry before and after aesthetic restorative demonstration.",
+      "image_url": "/images/smile-aesthetic.jpg",
+      "category": "aesthetic",
+      "display_order": 3,
+      "is_featured": false,
+      "show_on_homepage": true
+    },
+    {
+      "id": "g-4",
+      "title": "Clinic Front Glass Reception Access",
+      "description": "Modern glass double doors and welcoming exterior entryway.",
+      "image_url": "/images/clinic-exterior.jpg",
+      "category": "exterior",
+      "display_order": 4,
+      "is_featured": false,
+      "show_on_homepage": true
+    },
+    {
+      "id": "g-5",
+      "title": "Advanced Dental Operatory Unit",
+      "description": "High-end ergonomic patient chair with integrated handpieces and sterile water delivery systems.",
+      "image_url": "/images/hero-clinic.jpg",
+      "category": "equipment",
+      "display_order": 5,
+      "is_featured": false,
+      "show_on_homepage": true
+    },
+    {
+      "id": "g-6",
+      "title": "Patient Waiting Lounge & Seating",
+      "description": "Comfortable waiting area with upholstered navy sofas, air conditioning, and peaceful atmosphere.",
+      "image_url": "/images/waiting-lounge.jpg",
+      "category": "lounge",
+      "display_order": 6,
+      "is_featured": false,
+      "show_on_homepage": true
+    },
+    {
+      "id": "g-7",
+      "title": "Sterilization & Consultation Suite",
+      "description": "Strict hospital-grade autoclave sterilization protocols and clean consultation room.",
+      "image_url": "/images/dental-instruments.jpg",
+      "category": "equipment",
+      "display_order": 7,
+      "is_featured": false,
+      "show_on_homepage": true
+    },
+    {
+      "id": "g-1791639416051",
+      "title": "Dynasty Dental Solutions Website Mockup",
+      "description": "Clinic facility photograph",
+      "image_url": "/uploads/1791639416035-5zpctz.png",
+      "category": "treatment",
+      "display_order": 8,
+      "is_featured": false,
+      "show_on_homepage": true
+    }
+  ],
+  "appointments": [
+    {
+      "patient_name": "rehman",
+      "phone": "03167122897",
+      "requested_date": "2026-10-15",
+      "requested_time": "06:00 PM",
+      "service_id": "s-3",
+      "service_title": "Teeth Cleaning",
+      "notes": "",
+      "status": "confirmed",
+      "consent_given": true,
+      "id": "apt-1791978209318-rb2v",
+      "created_at": "2026-10-14T11:43:29.318Z",
+      "updated_at": "2026-10-14T11:44:19.602Z"
+    },
+    {
+      "patient_name": "asad",
+      "phone": "3321988786",
+      "requested_date": "2026-10-11",
+      "requested_time": "11:00 AM",
+      "service_id": "s-1",
+      "service_title": "General Dentistry",
+      "notes": "allergy",
+      "status": "cancelled",
+      "consent_given": true,
+      "id": "apt-1791643338379-a3h5",
+      "created_at": "2026-10-10T14:42:18.379Z",
+      "updated_at": "2026-10-10T14:42:50.351Z"
+    },
+    {
+      "patient_name": "absar",
+      "phone": "02227300914",
+      "requested_date": "2026-10-11",
+      "requested_time": "11:00 AM",
+      "service_id": "s-3",
+      "service_title": "Teeth Cleaning",
+      "notes": "hurry up!",
+      "status": "completed",
+      "consent_given": true,
+      "id": "apt-1791639090519-y9tv",
+      "created_at": "2026-10-10T13:31:30.519Z",
+      "updated_at": "2026-10-10T13:32:11.460Z"
+    },
+    {
+      "patient_name": "Zubair Tariq",
+      "phone": "0300 1234567",
+      "email": "zubair@example.com",
+      "requested_date": "2026-10-15",
+      "requested_time": "11:00 AM",
+      "service_id": "general",
+      "service_title": "Teeth Cleaning",
+      "notes": "Automated test booking",
+      "status": "pending",
+      "consent_given": true,
+      "id": "apt-1791559660371-vd0a",
+      "created_at": "2026-10-09T15:27:40.371Z",
+      "updated_at": "2026-10-09T15:27:40.371Z"
+    },
+    {
+      "id": "apt-seed-1",
+      "patient_name": "Zubair Khan",
+      "phone": "0300 1234567",
+      "email": "zubair.khan@example.com",
+      "requested_date": "2026-10-11",
+      "requested_time": "14:30",
+      "service_id": "s-3",
+      "service_title": "Teeth Cleaning",
+      "notes": "Need routine scaling & polishing before weekend.",
+      "status": "cancelled",
+      "consent_given": true,
+      "created_at": "2026-10-09T10:22:48.243Z",
+      "updated_at": "2026-10-10T13:32:18.603Z"
+    },
+    {
+      "id": "apt-seed-2",
+      "patient_name": "Fatima Noor",
+      "phone": "0312 9876543",
+      "email": "fatima.noor@example.com",
+      "requested_date": "2026-10-10",
+      "requested_time": "18:00",
+      "service_id": "s-4",
+      "service_title": "Root Canal Treatment",
+      "notes": "Severe pain on lower right molar. Urgent attention needed.",
+      "status": "pending",
+      "consent_given": true,
+      "created_at": "2026-10-09T13:22:48.243Z",
+      "updated_at": "2026-10-09T13:22:48.243Z"
+    }
+  ],
+  "contactMessages": [
+    {
+      "name": "shanza",
+      "contact_info": "021y32yt2",
+      "subject": "web",
+      "message": "how to make",
+      "id": "msg-1791639196114-ypmt",
+      "is_read": true,
+      "is_archived": false,
+      "created_at": "2026-10-10T13:33:16.114Z"
+    },
+    {
+      "name": "Ayesha Malik",
+      "contact_info": "0322 8889900",
+      "subject": "Scaling Inquiry",
+      "message": "What are the timings for Saturday teeth scaling?",
+      "id": "msg-1791559660447-da3f",
+      "is_read": false,
+      "is_archived": false,
+      "created_at": "2026-10-09T15:27:40.447Z"
+    },
+    {
+      "id": "msg-seed-1",
+      "name": "Hamza Tariq",
+      "contact_info": "0321 5556677",
+      "subject": "Orthodontic / Braces Inquiry",
+      "message": "Hello, do you provide invisible aligners or ceramic braces? What is the consultation process?",
+      "is_read": false,
+      "is_archived": false,
+      "created_at": "2026-10-09T07:22:48.243Z"
+    }
+  ],
+  "activityLogs": [
+    {
+      "id": "log-1791980969315",
+      "action": "Credentials Updated",
+      "details": "Owner account credentials updated. Admin email: dentalclinic@gmail.com.",
+      "admin_user": "dentalclinic@gmail.com",
+      "timestamp": "2026-10-14T12:29:29.315Z"
+    },
+    {
+      "id": "log-1791978259602",
+      "action": "Appointment Status Changed",
+      "details": "Appointment for rehman marked as \"confirmed\".",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-14T11:44:19.602Z"
+    },
+    {
+      "id": "log-1791978141682",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-14T11:42:21.682Z"
+    },
+    {
+      "id": "log-1791978030091",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-14T11:40:30.091Z"
+    },
+    {
+      "id": "log-1791896714267",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-13T13:05:14.267Z"
+    },
+    {
+      "id": "log-1791644177749",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T14:56:17.749Z"
+    },
+    {
+      "id": "log-1791643370351",
+      "action": "Appointment Status Changed",
+      "details": "Appointment for asad marked as \"cancelled\".",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T14:42:50.351Z"
+    },
+    {
+      "id": "log-1791642932324",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T14:35:32.324Z"
+    },
+    {
+      "id": "log-1791642838529",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T14:33:58.529Z"
+    },
+    {
+      "id": "log-1791642838452",
+      "action": "Opening Hours Updated",
+      "details": "Weekly schedule and operating hours updated.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T14:33:58.452Z"
+    },
+    {
+      "id": "log-1791642802549",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T14:33:22.549Z"
+    },
+    {
+      "id": "log-1791640687344",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:58:07.344Z"
+    },
+    {
+      "id": "log-1791640519881",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:55:19.881Z"
+    },
+    {
+      "id": "log-1791640131612",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:48:51.612Z"
+    },
+    {
+      "id": "log-1791639912618",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:45:12.618Z"
+    },
+    {
+      "id": "log-1791639912187",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:45:12.187Z"
+    },
+    {
+      "id": "log-1791639416852",
+      "action": "Gallery Image Saved",
+      "details": "Gallery image \"Dynasty Dental Solutions Website Mockup\" updated.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:36:56.852Z"
+    },
+    {
+      "id": "log-1791639379280",
+      "action": "Service Saved",
+      "details": "Service \"cleaning\" added or updated.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:36:19.280Z"
+    },
+    {
+      "id": "log-1791639349795",
+      "action": "Service Deleted",
+      "details": "Deleted service id s-4.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:35:49.795Z"
+    },
+    {
+      "id": "log-1791639305419",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:35:05.419Z"
+    },
+    {
+      "id": "log-1791639305305",
+      "action": "Opening Hours Updated",
+      "details": "Weekly schedule and operating hours updated.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:35:05.305Z"
+    },
+    {
+      "id": "log-1791639256958",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:34:16.958Z"
+    },
+    {
+      "id": "log-1791639237998",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:33:57.998Z"
+    },
+    {
+      "id": "log-1791639138603",
+      "action": "Appointment Status Changed",
+      "details": "Appointment for Zubair Khan marked as \"cancelled\".",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:32:18.603Z"
+    },
+    {
+      "id": "log-1791639131460",
+      "action": "Appointment Status Changed",
+      "details": "Appointment for absar marked as \"completed\".",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:32:11.460Z"
+    },
+    {
+      "id": "log-1791639119250",
+      "action": "Appointment Status Changed",
+      "details": "Appointment for absar marked as \"confirmed\".",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:31:59.250Z"
+    },
+    {
+      "id": "log-1791639033047",
+      "action": "Settings Published",
+      "details": "Owner published updated clinic settings to live website.",
+      "admin_user": "owner@dynastydental.pk",
+      "timestamp": "2026-10-10T13:30:33.047Z"
+    },
+    {
+      "id": "log-seed-1",
+      "action": "System Initialized",
+      "details": "Dynasty Dental Solutions portal initialized with initial clinic data.",
+      "admin_user": "system@dynastydental.pk",
+      "timestamp": "2026-10-09T15:22:48.243Z"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t-1",
+      "patient_name": "Muhammad Usman",
+      "rating": 5,
+      "review_text": "Had an emergency root canal done at 2 AM. Dr. Niyalish and the staff were gentle, professional, and completely relieved my severe toothache. Highly recommended in Faisalabad!",
+      "date_text": "2 weeks ago",
+      "is_verified": true
+    },
+    {
+      "id": "t-2",
+      "patient_name": "Ayesha Tariq",
+      "rating": 5,
+      "review_text": "The clinic is exceptionally clean and modern. Got my scaling and polishing done, painless experience and my teeth feel so fresh. 10/10 service.",
+      "date_text": "1 month ago",
+      "is_verified": true
+    },
+    {
+      "id": "t-3",
+      "patient_name": "Bilal Ahmad",
+      "rating": 5,
+      "review_text": "Best dental clinic on Jinnah Rd. Transparent pricing, no unnecessary treatments pushed, and very kind behavior with patients.",
+      "date_text": "2 months ago",
+      "is_verified": true
+    }
+  ],
+  "adminCredentials": {
+    "email": "dentalclinic@gmail.com",
+    "password": "dentaldental"
+  }
+}
